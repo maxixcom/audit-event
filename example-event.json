@@ -1,0 +1,61 @@
+{
+  "eventId": "550e8400-e29b-41d4-a716-446655440000",
+  "version": "1.0",
+  "timestamp": "2026-02-13T14:30:00.123Z",
+  "source": "order-service",
+  "correlationId": "req-abc-123",
+  "actor": {
+    "actorType": "USER",
+    "userId": "user-42",
+    "sessionId": "sess-xyz",
+    "roles": [
+      "manager",
+      "sales"
+    ],
+    "ipAddress": "192.168.1.10",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+  },
+  "action": "sales.order.updated",
+  "category": "UPDATE",
+  "resource": {
+    "type": "order",
+    "id": "ord-1001",
+    "displayName": "Заказ #1001",
+    "parentResource": {
+      "type": "customer",
+      "id": "cust-500",
+      "displayName": "ООО Рога и Копыта"
+    }
+  },
+  "changes": [
+    {
+      "field": "status",
+      "oldValue": "pending",
+      "newValue": "confirmed"
+    },
+    {
+      "field": "deliveryAddress.city",
+      "oldValue": "Москва",
+      "newValue": "Казань"
+    },
+    {
+      "field": "amount",
+      "oldValue": 2500.0,
+      "newValue": 2800.0
+    }
+  ],
+  "outcome": {
+    "success": true,
+    "durationMs": 150
+  },
+  "metadata": {
+    "environment": "production",
+    "version": "1.2.3",
+    "previousStatus": "pending"
+  },
+  "tags": [
+    "important",
+    "customer-facing",
+    "sales"
+  ]
+}
