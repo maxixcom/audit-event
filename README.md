@@ -573,8 +573,8 @@ dependencies {
 **Размер библиотеки:** ~61KB
 
 **Совместимость:**
-- Java 21+
-- Kotlin 2.2.21+
+- Java 17+
+- Kotlin 1.9+ (для Kotlin проектов)
 - Может использоваться в Spring Boot, Micronaut, Quarkus, plain Java/Kotlin и других проектах
 
 ## License
