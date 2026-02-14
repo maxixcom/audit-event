@@ -4,9 +4,9 @@ plugins {
 	`maven-publish`
 }
 
-group = "com.boomstream"
+group = "io.github.maxixcom.audit"
 version = "0.0.1-SNAPSHOT"
-description = "User audit events logging library"
+description = "Audit event logging library"
 
 java {
 	toolchain {
@@ -50,9 +50,9 @@ publishing {
 			from(components["java"])
 
 			pom {
-				name.set("User Log Library")
+				name.set("Audit Event Library")
 				description.set("Structured audit event logging library for Kotlin/Java")
-				url.set("https://github.com/boomstream/user-log-lib")
+				url.set("https://github.com/maxixcom/audit-event")
 
 				licenses {
 					license {
@@ -63,9 +63,15 @@ publishing {
 
 				developers {
 					developer {
-						id.set("boomstream")
-						name.set("Boomstream")
+						id.set("maxixcom")
+						name.set("Maxim")
 					}
+				}
+
+				scm {
+					connection.set("scm:git:git://github.com/maxixcom/audit-event.git")
+					developerConnection.set("scm:git:ssh://github.com/maxixcom/audit-event.git")
+					url.set("https://github.com/maxixcom/audit-event")
 				}
 			}
 		}

@@ -3,7 +3,10 @@
     "allow": [
       "Bash(./gradlew test:*)",
       "Bash(cat:*)",
-      "Bash(./gradlew clean build:*)"
+      "Bash(./gradlew clean build:*)",
+      "Bash(ls:*)",
+      "Bash(jar -tf:*)",
+      "Bash(find:*)"
     ]
   }
 }

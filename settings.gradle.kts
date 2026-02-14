@@ -1,1 +1,1 @@
-rootProject.name = "user-log-lib"
+rootProject.name = "audit-event"

@@ -1,6 +1,14 @@
-# User Log Library
+# Audit Event Library
 
 Библиотека для создания структурированных событий аудита (audit events) в Kotlin/Java приложениях.
+
+## Документация
+
+- [Примеры использования](doc/EXAMPLES.md)
+- [Архитектура](doc/ARCHITECTURE.md)
+- [Сводка проекта](doc/SUMMARY.md)
+- [Чеклист реализации](doc/CHECKLIST.md)
+- [Пример JSON события](doc/example-event.json)
 
 ## Возможности
 
@@ -71,8 +79,8 @@
 ### Kotlin DSL
 
 ```kotlin
-import com.boomstream.userlog.dsl.auditEvent
-import com.boomstream.userlog.model.*
+import io.github.maxixcom.audit.event.dsl.auditEvent
+import io.github.maxixcom.audit.event.model.*
 
 val event = auditEvent {
     source = "order-service"
@@ -122,8 +130,8 @@ val event = auditEvent {
 ### Builder API
 
 ```java
-import com.boomstream.userlog.builder.*;
-import com.boomstream.userlog.model.*;
+import io.github.maxixcom.audit.event.builder.*;
+import io.github.maxixcom.audit.event.model.*;
 
 AuditEvent event = AuditEventBuilder.create()
     .source("order-service")
@@ -152,7 +160,7 @@ AuditEvent event = AuditEventBuilder.create()
 ### Фабричные методы
 
 ```kotlin
-import com.boomstream.userlog.factory.AuditEventFactory
+import io.github.maxixcom.audit.event.factory.AuditEventFactory
 
 // Вход пользователя
 val loginEvent = AuditEventFactory.createLoginEvent(
@@ -369,7 +377,7 @@ val event = auditEvent {
 ## Сериализация
 
 ```kotlin
-import com.boomstream.userlog.serialization.AuditEventSerializer
+import io.github.maxixcom.audit.event.serialization.AuditEventSerializer
 
 val serializer = AuditEventSerializer()
 
@@ -511,7 +519,7 @@ kafkaProducer.send(record)
 
 ```kotlin
 dependencies {
-    implementation("com.boomstream:user-log-lib:0.0.1-SNAPSHOT")
+    implementation("io.github.maxixcom.audit:audit-event:0.0.1-SNAPSHOT")
 }
 ```
 
@@ -519,7 +527,7 @@ dependencies {
 
 ```groovy
 dependencies {
-    implementation 'com.boomstream:user-log-lib:0.0.1-SNAPSHOT'
+    implementation 'io.github.maxixcom.audit:audit-event:0.0.1-SNAPSHOT'
 }
 ```
 
