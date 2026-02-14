@@ -2,6 +2,7 @@ plugins {
 	kotlin("jvm") version "2.2.21"
 	`java-library`
 	`maven-publish`
+	id("org.jreleaser") version "1.15.0"
 }
 
 group = "io.github.maxixcom.audit"
@@ -10,7 +11,7 @@ description = "Audit event logging library"
 
 java {
 	toolchain {
-		languageVersion = JavaLanguageVersion.of(21)
+		languageVersion = JavaLanguageVersion.of(17)
 	}
 	withSourcesJar()
 	withJavadocJar()
@@ -72,6 +73,44 @@ publishing {
 					connection.set("scm:git:git://github.com/maxixcom/audit-event.git")
 					developerConnection.set("scm:git:ssh://github.com/maxixcom/audit-event.git")
 					url.set("https://github.com/maxixcom/audit-event")
+				}
+			}
+		}
+	}
+
+	repositories {
+		maven {
+			url = layout.buildDirectory.dir("staging-deploy").get().asFile.toURI()
+		}
+	}
+}
+
+jreleaser {
+	// Подпись артефактов
+	signing {
+		active.set(org.jreleaser.model.Active.ALWAYS)
+		armored.set(true)
+	}
+
+	// Настройка деплоя
+	deploy {
+		maven {
+			// Maven Central через Portal API
+			mavenCentral {
+				create("sonatype") {
+					active.set(org.jreleaser.model.Active.RELEASE)
+					url.set("https://central.sonatype.com/api/v1/publisher")
+					stagingRepository("build/staging-deploy")
+					applyMavenCentralRules.set(true)
+				}
+			}
+
+			// GitHub Packages
+			github {
+				create("github-packages") {
+					active.set(org.jreleaser.model.Active.RELEASE)
+					url.set("https://maven.pkg.github.com/maxixcom/audit-event")
+					stagingRepository("build/staging-deploy")
 				}
 			}
 		}

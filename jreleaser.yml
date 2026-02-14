@@ -1,0 +1,42 @@
+project:
+  name: audit-event
+  description: Structured audit event logging library for Kotlin/Java
+  longDescription: |
+    Audit Event Library provides a comprehensive solution for creating structured
+    audit events in Kotlin/Java applications. It includes support for actors,
+    resources, changes tracking, and outcome reporting.
+  website: https://github.com/maxixcom/audit-event
+  docsUrl: https://github.com/maxixcom/audit-event
+  license: MIT
+  authors:
+    - Maxim
+  java:
+    groupId: io.github.maxixcom.audit
+    artifactId: audit-event
+    version: 0.0.1
+
+environment:
+  properties:
+    artifactsDir: out/jreleaser/assemble/audit-event/archive
+
+signing:
+  active: ALWAYS
+  armored: true
+
+deploy:
+  maven:
+    mavenCentral:
+      sonatype:
+        active: RELEASE
+        url: https://central.sonatype.com/api/v1/publisher
+        applyMavenCentralRules: true
+        stagingRepositories:
+          - build/staging-deploy
+
+    github:
+      github-packages:
+        active: RELEASE
+        url: https://maven.pkg.github.com/maxixcom/audit-event
+        authorization: BEARER
+        stagingRepositories:
+          - build/staging-deploy

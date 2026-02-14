@@ -535,11 +535,24 @@ dependencies {
 
 ```xml
 <dependency>
-    <groupId>com.boomstream</groupId>
-    <artifactId>user-log-lib</artifactId>
+    <groupId>io.github.maxixcom.audit</groupId>
+    <artifactId>audit-event</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 </dependency>
 ```
+
+## Публикация
+
+Библиотека публикуется в Maven Central и GitHub Packages.
+
+Последняя версия: ![Maven Central](https://img.shields.io/maven-central/v/io.github.maxixcom.audit/audit-event)
+
+Подробнее о процессе публикации см. [doc/PUBLISHING.md](doc/PUBLISHING.md).
+
+## Требования
+
+- **Java 17+** — минимальная версия для использования библиотеки
+- Kotlin 1.9+ (для Kotlin проектов)
 
 ## Зависимости
 

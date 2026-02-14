@@ -6,7 +6,12 @@
       "Bash(./gradlew clean build:*)",
       "Bash(ls:*)",
       "Bash(jar -tf:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "WebFetch(domain:jreleaser.org)",
+      "WebFetch(domain:brightinventions.pl)",
+      "Bash(/Users/maxix/Workspace/boom/user-logs/user-log-lib/build.gradle.kts << 'EOF'\n\njreleaser {\n\t// Подпись артефактов\n\tsigning {\n\t\tactive.set\\(org.jreleaser.model.Active.ALWAYS\\)\n\t\tarmored.set\\(true\\)\n\t}\n\n\t// Настройка деплоя\n\tdeploy {\n\t\tmaven {\n\t\t\t// Maven Central через Portal API\n\t\t\tmavenCentral {\n\t\t\t\tcreate\\(\"sonatype\"\\) {\n\t\t\t\t\tactive.set\\(org.jreleaser.model.Active.RELEASE\\)\n\t\t\t\t\turl.set\\(\"https://central.sonatype.com/api/v1/publisher\"\\)\n\t\t\t\t\tstagingRepository\\(\"build/staging-deploy\"\\)\n\t\t\t\t\tsetApplyMavenCentralRules\\(true\\)\n\t\t\t\t}\n\t\t\t}\n\n\t\t\t// GitHub Packages\n\t\t\tgithub {\n\t\t\t\tcreate\\(\"github-packages\"\\) {\n\t\t\t\t\tactive.set\\(org.jreleaser.model.Active.RELEASE\\)\n\t\t\t\t\turl.set\\(\"https://maven.pkg.github.com/maxixcom/audit-event\"\\)\n\t\t\t\t\tstagingRepository\\(\"build/staging-deploy\"\\)\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}\nEOF)",
+      "Bash(./gradlew jreleaserConfig:*)",
+      "Bash(javap:*)"
     ]
   }
 }
