@@ -505,14 +505,56 @@ kafkaProducer.send(record)
 ./gradlew test --tests "*.UsageExamples"
 ```
 
-## Зависимости
+## Установка
+
+### Gradle (Kotlin DSL)
 
 ```kotlin
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("tools.jackson.module:jackson-module-kotlin")
+    implementation("com.boomstream:user-log-lib:0.0.1-SNAPSHOT")
 }
 ```
+
+### Gradle (Groovy)
+
+```groovy
+dependencies {
+    implementation 'com.boomstream:user-log-lib:0.0.1-SNAPSHOT'
+}
+```
+
+### Maven
+
+```xml
+<dependency>
+    <groupId>com.boomstream</groupId>
+    <artifactId>user-log-lib</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+</dependency>
+```
+
+## Зависимости
+
+Библиотека имеет минимальные транзитивные зависимости:
+
+```kotlin
+dependencies {
+    // Kotlin runtime (для Kotlin проектов уже включён)
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+
+    // JSON сериализация
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.18.2")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.18.2")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.18.2")
+}
+```
+
+**Размер библиотеки:** ~61KB
+
+**Совместимость:**
+- Java 21+
+- Kotlin 2.2.21+
+- Может использоваться в Spring Boot, Micronaut, Quarkus, plain Java/Kotlin и других проектах
 
 ## License
 

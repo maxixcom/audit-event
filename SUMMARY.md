@@ -211,20 +211,33 @@ kafkaProducer.send(record)
 
 ## Зависимости
 
+**Минимальные транзитивные зависимости:**
+
 ```kotlin
 dependencies {
-    implementation("com.fasterxml.jackson.core:jackson-databind")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
+    // Только Jackson для JSON и Kotlin reflect
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.18.2")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.18.2")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.18.2")
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
 }
 ```
 
+**Что НЕ включено:**
+- ❌ Spring Framework зависимости
+- ❌ Веб-серверы или фреймворки
+- ❌ Тяжёлые runtime зависимости
+
+**Размер:** ~61KB (вместо ~20MB с Spring Boot)
+
 ## Статистика
 
-- 📦 **11 файлов** в `src/main/kotlin`
-- ✅ **27 тестов** (100% success)
+- 📦 **10 файлов** в `src/main/kotlin` (чистая библиотека без Spring Boot)
+- ✅ **29 тестов** (100% success)
 - 📄 **4 документа** (README, EXAMPLES, ARCHITECTURE, SUMMARY)
-- 🎯 **5 API стилей**: Kotlin DSL, Java Builder, Factories, Direct models, Serialization
+- 🎯 **3 API стиля**: Kotlin DSL, Builder API, Factories
+- 💾 **Размер jar:** 61KB
+- 🚀 **Тип:** Pure Kotlin/Java library
 
 ## Примеры использования
 
