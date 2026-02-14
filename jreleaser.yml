@@ -30,12 +30,13 @@ deploy:
         active: RELEASE
         url: https://central.sonatype.com/api/v1/publisher
         applyMavenCentralRules: true
+        verifyPom: false
         stagingRepositories:
           - build/staging-deploy
 
     github:
       github-packages:
-        active: RELEASE
+        active: NEVER
         url: https://maven.pkg.github.com/maxixcom/audit-event
         authorization: BEARER
         stagingRepositories:
