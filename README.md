@@ -552,7 +552,7 @@ dependencies {
 ## Требования
 
 - **Java 17+** — минимальная версия для использования библиотеки
-- Kotlin 1.9+ (для Kotlin проектов)
+- Kotlin 1.7+ (для Kotlin проектов)
 
 ## Зависимости
 
@@ -574,7 +574,7 @@ dependencies {
 
 **Совместимость:**
 - Java 17+
-- Kotlin 1.9+ (для Kotlin проектов)
+- Kotlin 1.7+ (для Kotlin проектов)
 - Может использоваться в Spring Boot, Micronaut, Quarkus, plain Java/Kotlin и других проектах
 
 ## License
