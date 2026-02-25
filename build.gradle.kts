@@ -1,17 +1,19 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
-	kotlin("jvm") version "2.2.21"
+	kotlin("jvm") version "1.7.21"
 	`java-library`
 	`maven-publish`
 	id("org.jreleaser") version "1.15.0"
 }
 
 group = "io.github.maxixcom.audit"
-version = "0.0.1"
+version = "0.0.2"
 description = "Audit event logging library"
 
 java {
 	toolchain {
-		languageVersion = JavaLanguageVersion.of(17)
+		languageVersion.set(JavaLanguageVersion.of(17))
 	}
 	withSourcesJar()
 	withJavadocJar()
@@ -35,9 +37,9 @@ dependencies {
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
-kotlin {
-	compilerOptions {
-		freeCompilerArgs.addAll("-Xjsr305=strict")
+tasks.withType<KotlinCompile> {
+	kotlinOptions {
+		freeCompilerArgs = freeCompilerArgs + "-Xjsr305=strict"
 	}
 }
 
