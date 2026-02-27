@@ -615,7 +615,7 @@ kafkaProducer.send(record)
 
 ```kotlin
 dependencies {
-    implementation("io.github.maxixcom.audit:audit-event:0.0.1-SNAPSHOT")
+    implementation("io.github.maxixcom.audit:audit-event:0.0.3")
 }
 ```
 
@@ -623,7 +623,7 @@ dependencies {
 
 ```groovy
 dependencies {
-    implementation 'io.github.maxixcom.audit:audit-event:0.0.1-SNAPSHOT'
+    implementation 'io.github.maxixcom.audit:audit-event:0.0.3'
 }
 ```
 
@@ -633,7 +633,7 @@ dependencies {
 <dependency>
     <groupId>io.github.maxixcom.audit</groupId>
     <artifactId>audit-event</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.3</version>
 </dependency>
 ```
 
