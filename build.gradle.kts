@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "io.github.maxixcom.audit"
-version = "0.0.4"
+version = "0.0.5"
 description = "Audit event logging library"
 
 java {
@@ -104,6 +104,8 @@ jreleaser {
 					url.set("https://central.sonatype.com/api/v1/publisher")
 					stagingRepository("build/staging-deploy")
 					applyMavenCentralRules.set(true)
+					retryDelay.set(30)
+					maxRetries.set(100)
 				}
 			}
 
