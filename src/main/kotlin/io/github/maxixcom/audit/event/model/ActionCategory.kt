@@ -12,6 +12,7 @@ enum class ActionCategory {
     IMPORT,
     LOGIN,
     LOGOUT,
+    REGISTER,
     PERMISSION_CHANGE,
     CONFIGURATION_CHANGE,
     EXECUTE,
