@@ -26,16 +26,16 @@ data class AuditEvent(
     val correlationId: String? = null,
 
     /** Актор, выполняющий действие */
-    val actor: Actor,
+    val actor: Actor? = null,
 
     /** Действие в формате domain.entity.verb */
-    val action: String,
+    val action: String? = null,
 
     /** Категория действия */
-    val category: ActionCategory,
+    val category: ActionCategory? = null,
 
     /** Целевой ресурс */
-    val resource: Resource,
+    val resource: Resource? = null,
 
     /** Список изменений */
     val changes: List<Change> = emptyList(),
@@ -86,6 +86,9 @@ data class AuditEvent(
     @JsonIgnore
     fun getSummary(): String {
         val result = if (outcome?.success != false) "успешно" else "с ошибкой"
-        return "${actor.userId ?: actor.actorType} $result выполнил '$action' над ${resource.type}:${resource.id}"
+        val actorStr = actor?.let { it.userId ?: it.actorType.toString() } ?: "unknown"
+        val actionStr = action ?: "unknown action"
+        val resourceStr = resource?.let { "${it.type}:${it.id}" } ?: "unknown resource"
+        return "$actorStr $result выполнил '$actionStr' над $resourceStr"
     }
 }

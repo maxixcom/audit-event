@@ -109,10 +109,6 @@ class AuditEventBuilder private constructor() {
 
     fun build(): AuditEvent {
         require(source != null) { "source is required" }
-        require(action != null) { "action is required" }
-        require(category != null) { "category is required" }
-        require(actor != null) { "actor is required" }
-        require(resource != null) { "resource is required" }
 
         return AuditEvent(
             eventId = eventId ?: UUID.randomUUID().toString(),
@@ -120,10 +116,10 @@ class AuditEventBuilder private constructor() {
             timestamp = timestamp,
             source = source!!,
             correlationId = correlationId,
-            actor = actor!!,
-            action = action!!,
-            category = category!!,
-            resource = resource!!,
+            actor = actor,
+            action = action,
+            category = category,
+            resource = resource,
             changes = changes.toList(),
             outcome = outcome,
             metadata = metadata.toMap(),

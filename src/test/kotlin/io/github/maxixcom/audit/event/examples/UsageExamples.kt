@@ -276,7 +276,7 @@ object UsageExamples {
 
         println("\nNested Resource Event:")
         println(serializer.serializePretty(event))
-        println("Resource Full Path: ${event.resource.getFullPath()}")
+        println("Resource Full Path: ${event.resource!!.getFullPath()}")
     }
 
     /**

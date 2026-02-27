@@ -33,10 +33,10 @@ class AuditEventFactoryTest {
         assertEquals("auth-service", event.source)
         assertEquals("auth.user.login", event.action)
         assertEquals(ActionCategory.LOGIN, event.category)
-        assertEquals("user-42", event.actor.userId)
-        assertEquals("sess-123", event.actor.sessionId)
-        assertEquals("session", event.resource.type)
-        assertEquals("sess-123", event.resource.id)
+        assertEquals("user-42", event.actor!!.userId)
+        assertEquals("sess-123", event.actor!!.sessionId)
+        assertEquals("session", event.resource!!.type)
+        assertEquals("sess-123", event.resource!!.id)
         assertEquals(true, event.outcome?.success)
         assertEquals(true, event.tags.contains("authentication"))
     }
@@ -73,7 +73,7 @@ class AuditEventFactoryTest {
         assertEquals("auth-service", event.source)
         assertEquals("auth.user.logout", event.action)
         assertEquals(ActionCategory.LOGOUT, event.category)
-        assertEquals("user-42", event.actor.userId)
+        assertEquals("user-42", event.actor!!.userId)
     }
 
     @Test
@@ -96,8 +96,8 @@ class AuditEventFactoryTest {
         assertEquals("order-service", event.source)
         assertEquals("order-service.order.created", event.action)
         assertEquals(ActionCategory.CREATE, event.category)
-        assertEquals("order", event.resource.type)
-        assertEquals("ord-1001", event.resource.id)
+        assertEquals("order", event.resource!!.type)
+        assertEquals("ord-1001", event.resource!!.id)
         assertEquals(3, event.changes.size)
 
         val statusChange = event.changes.find { it.field == "status" }
@@ -172,7 +172,7 @@ class AuditEventFactoryTest {
         // Then
         assertEquals("document-service.document.viewed", event.action)
         assertEquals(ActionCategory.VIEW, event.category)
-        assertEquals("document", event.resource.type)
+        assertEquals("document", event.resource!!.type)
         assertEquals(0, event.changes.size)
     }
 

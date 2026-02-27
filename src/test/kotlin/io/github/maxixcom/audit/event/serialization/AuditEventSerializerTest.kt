@@ -58,8 +58,8 @@ class AuditEventSerializerTest {
         assertEquals(originalEvent.source, deserializedEvent.source)
         assertEquals(originalEvent.action, deserializedEvent.action)
         assertEquals(originalEvent.category, deserializedEvent.category)
-        assertEquals(originalEvent.actor.userId, deserializedEvent.actor.userId)
-        assertEquals(originalEvent.resource.id, deserializedEvent.resource.id)
+        assertEquals(originalEvent.actor!!.userId, deserializedEvent.actor!!.userId)
+        assertEquals(originalEvent.resource!!.id, deserializedEvent.resource!!.id)
         assertEquals(originalEvent.changes.size, deserializedEvent.changes.size)
         assertEquals(originalEvent.outcome?.success, deserializedEvent.outcome?.success)
     }
@@ -154,10 +154,10 @@ class AuditEventSerializerTest {
         val deserialized = serializer.deserialize(json)
 
         // Then
-        assertEquals("comment", deserialized.resource.type)
-        assertNotNull(deserialized.resource.parentResource)
-        assertEquals("task", deserialized.resource.parentResource?.type)
-        assertNotNull(deserialized.resource.parentResource?.parentResource)
-        assertEquals("project", deserialized.resource.parentResource?.parentResource?.type)
+        assertEquals("comment", deserialized.resource!!.type)
+        assertNotNull(deserialized.resource!!.parentResource)
+        assertEquals("task", deserialized.resource!!.parentResource?.type)
+        assertNotNull(deserialized.resource!!.parentResource?.parentResource)
+        assertEquals("project", deserialized.resource!!.parentResource?.parentResource?.type)
     }
 }

@@ -60,14 +60,14 @@ class AuditEventBuilderTest {
         assertEquals(ActionCategory.UPDATE, event.category)
         assertEquals("req-abc-123", event.correlationId)
 
-        assertEquals(ActorType.USER, event.actor.actorType)
-        assertEquals("user-42", event.actor.userId)
-        assertEquals("sess-xyz", event.actor.sessionId)
-        assertEquals(listOf("manager", "sales"), event.actor.roles)
+        assertEquals(ActorType.USER, event.actor!!.actorType)
+        assertEquals("user-42", event.actor!!.userId)
+        assertEquals("sess-xyz", event.actor!!.sessionId)
+        assertEquals(listOf("manager", "sales"), event.actor!!.roles)
 
-        assertEquals("order", event.resource.type)
-        assertEquals("ord-1001", event.resource.id)
-        assertNotNull(event.resource.parentResource)
+        assertEquals("order", event.resource!!.type)
+        assertEquals("ord-1001", event.resource!!.id)
+        assertNotNull(event.resource!!.parentResource)
 
         assertEquals(2, event.changes.size)
         assertEquals("status", event.changes[0].field)
@@ -166,5 +166,30 @@ class AuditEventBuilderTest {
         assertEquals("user-42", actor.onBehalfOf?.userId)
         assertEquals("John Doe", actor.onBehalfOf?.userName)
         assertEquals("Support request", actor.onBehalfOf?.reason)
+    }
+
+    @Test
+    fun `should create audit event with only required fields`() {
+        // Given & When
+        val event = AuditEventBuilder.create()
+            .source("minimal-service")
+            .build()
+
+        // Then
+        assertEquals("minimal-service", event.source)
+        assertEquals("1.0", event.version)
+        assertNotNull(event.eventId)
+        assertNotNull(event.timestamp)
+
+        // Optional fields should be null or empty
+        assertEquals(null, event.actor)
+        assertEquals(null, event.action)
+        assertEquals(null, event.category)
+        assertEquals(null, event.resource)
+        assertEquals(null, event.correlationId)
+        assertEquals(null, event.outcome)
+        assertEquals(0, event.changes.size)
+        assertEquals(0, event.metadata.size)
+        assertEquals(0, event.tags.size)
     }
 }

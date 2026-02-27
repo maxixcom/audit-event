@@ -63,18 +63,18 @@ class AuditEventDslTest {
         assertEquals(ActionCategory.UPDATE, event.category)
         assertEquals("req-abc-123", event.correlationId)
 
-        assertEquals(ActorType.USER, event.actor.actorType)
-        assertEquals("user-42", event.actor.userId)
-        assertEquals("sess-xyz", event.actor.sessionId)
-        assertEquals(listOf("manager", "sales"), event.actor.roles)
-        assertEquals("192.168.1.10", event.actor.ipAddress)
+        assertEquals(ActorType.USER, event.actor!!.actorType)
+        assertEquals("user-42", event.actor!!.userId)
+        assertEquals("sess-xyz", event.actor!!.sessionId)
+        assertEquals(listOf("manager", "sales"), event.actor!!.roles)
+        assertEquals("192.168.1.10", event.actor!!.ipAddress)
 
-        assertEquals("order", event.resource.type)
-        assertEquals("ord-1001", event.resource.id)
-        assertEquals("Заказ #1001", event.resource.displayName)
-        assertNotNull(event.resource.parentResource)
-        assertEquals("customer", event.resource.parentResource?.type)
-        assertEquals("cust-500", event.resource.parentResource?.id)
+        assertEquals("order", event.resource!!.type)
+        assertEquals("ord-1001", event.resource!!.id)
+        assertEquals("Заказ #1001", event.resource!!.displayName)
+        assertNotNull(event.resource!!.parentResource)
+        assertEquals("customer", event.resource!!.parentResource?.type)
+        assertEquals("cust-500", event.resource!!.parentResource?.id)
 
         assertEquals(2, event.changes.size)
         assertEquals("status", event.changes[0].field)
@@ -115,9 +115,9 @@ class AuditEventDslTest {
         assertEquals("test-service", event.source)
         assertEquals("test.action", event.action)
         assertEquals(ActionCategory.VIEW, event.category)
-        assertEquals(ActorType.SYSTEM, event.actor.actorType)
-        assertEquals("test", event.resource.type)
-        assertEquals("123", event.resource.id)
+        assertEquals(ActorType.SYSTEM, event.actor!!.actorType)
+        assertEquals("test", event.resource!!.type)
+        assertEquals("123", event.resource!!.id)
         assertEquals(0, event.changes.size)
     }
 
@@ -146,10 +146,10 @@ class AuditEventDslTest {
         }
 
         // Then
-        assertNotNull(event.actor.onBehalfOf)
-        assertEquals("user-42", event.actor.onBehalfOf?.userId)
-        assertEquals("John Doe", event.actor.onBehalfOf?.userName)
-        assertEquals("Customer support request #12345", event.actor.onBehalfOf?.reason)
+        assertNotNull(event.actor!!.onBehalfOf)
+        assertEquals("user-42", event.actor!!.onBehalfOf?.userId)
+        assertEquals("John Doe", event.actor!!.onBehalfOf?.userName)
+        assertEquals("Customer support request #12345", event.actor!!.onBehalfOf?.reason)
     }
 
     @Test
@@ -182,7 +182,7 @@ class AuditEventDslTest {
         }
 
         // Then
-        assertEquals("project:123/task:456/comment:789", event.resource.getFullPath())
+        assertEquals("project:123/task:456/comment:789", event.resource!!.getFullPath())
     }
 
     @Test
@@ -240,5 +240,30 @@ class AuditEventDslTest {
         assertEquals(true, loginEvent.isSecurityCritical())
         assertEquals(true, deleteEvent.isSecurityCritical())
         assertEquals(false, viewEvent.isSecurityCritical())
+    }
+
+    @Test
+    fun `should create audit event with only required fields`() {
+        // Given & When
+        val event = auditEvent {
+            source = "minimal-service"
+        }
+
+        // Then
+        assertEquals("minimal-service", event.source)
+        assertEquals("1.0", event.version)
+        assertNotNull(event.eventId)
+        assertNotNull(event.timestamp)
+
+        // Optional fields should be null or empty
+        assertEquals(null, event.actor)
+        assertEquals(null, event.action)
+        assertEquals(null, event.category)
+        assertEquals(null, event.resource)
+        assertEquals(null, event.correlationId)
+        assertEquals(null, event.outcome)
+        assertEquals(0, event.changes.size)
+        assertEquals(0, event.metadata.size)
+        assertEquals(0, event.tags.size)
     }
 }

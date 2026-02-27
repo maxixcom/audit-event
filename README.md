@@ -12,7 +12,8 @@
 
 ## Возможности
 
-- ✅ **Полная модель события аудита** — actor, resource, changes, outcome, metadata
+- ✅ **Гибкая модель события** — только 4 обязательных поля (eventId, version, timestamp, source)
+- ✅ **Полная модель события аудита** — actor, resource, changes, outcome, metadata (все опциональные)
 - ✅ **Kotlin DSL** — удобный и выразительный синтаксис для Kotlin
 - ✅ **Builder API** — полная поддержка Java с fluent builders
 - ✅ **Фабричные методы** — готовые шаблоны для типовых сценариев
@@ -74,9 +75,67 @@
 }
 ```
 
+## Обязательные и опциональные поля
+
+### Обязательные поля
+
+Только 4 поля являются обязательными при создании события:
+
+- **`eventId`** — уникальный идентификатор события (генерируется автоматически, если не указан)
+- **`version`** — версия схемы события (по умолчанию "1.0")
+- **`timestamp`** — временная метка события (по умолчанию `Instant.now()`)
+- **`source`** — источник события (название сервиса) — **единственное поле, которое нужно указывать явно**
+
+### Опциональные поля
+
+Все остальные поля являются опциональными (nullable):
+
+- **`actor`** — актор, выполняющий действие
+- **`action`** — действие в формате domain.entity.verb
+- **`category`** — категория действия (CREATE, UPDATE, DELETE и т.д.)
+- **`resource`** — целевой ресурс
+- **`correlationId`** — ID для связи цепочки действий
+- **`outcome`** — результат выполнения действия
+
+### Коллекции (всегда инициализированы)
+
+Эти поля не могут быть null и инициализируются пустыми значениями:
+
+- **`changes`** — список изменений (по умолчанию пустой список)
+- **`metadata`** — дополнительные метаданные (по умолчанию пустая Map)
+- **`tags`** — теги для фильтрации (по умолчанию пустой Set)
+
+### Примеры
+
+#### Минимальное событие
+
+```kotlin
+// Только обязательное поле source
+val minimalEvent = auditEvent {
+    source = "my-service"
+}
+// Остальные поля: eventId, version, timestamp создаются автоматически
+// actor, action, category, resource будут null
+```
+
+#### Частично заполненное событие
+
+```kotlin
+val partialEvent = auditEvent {
+    source = "notification-service"
+    action = "email.sent"
+
+    metadata("recipient" to "user@example.com")
+    tags("automated")
+}
+// actor, category, resource остаются null
+```
+
 ## Использование
 
 ### Kotlin DSL
+
+#### Полное событие
 
 ```kotlin
 import io.github.maxixcom.audit.event.dsl.auditEvent
@@ -158,6 +217,8 @@ AuditEvent event = AuditEventBuilder.create()
 ```
 
 ### Фабричные методы
+
+> **Примечание:** Фабричные методы создают полные события со всеми необходимыми полями (`actor`, `action`, `category`, `resource`). Для создания минимальных событий используйте DSL или Builder напрямую.
 
 ```kotlin
 import io.github.maxixcom.audit.event.factory.AuditEventFactory
@@ -414,14 +475,49 @@ val path = event.resource.getFullPath()
 
 ## Best Practices
 
-### 1. Формат action
+### 1. Когда использовать минимальные и полные события
+
+**Минимальные события** (только `source`):
+- Технические события без привязки к пользователю (системные операции, health checks)
+- Метрики и статистика
+- События-маркеры (начало/конец процесса)
+
+```kotlin
+val healthCheckEvent = auditEvent {
+    source = "health-service"
+}
+```
+
+**Частичные события** (без некоторых полей):
+- События без конкретного пользователя (автоматические задачи)
+- События без ресурса (общие действия сервиса)
+
+```kotlin
+val scheduledTask = auditEvent {
+    source = "scheduler-service"
+    action = "cleanup.temp_files"
+    category = ActionCategory.EXECUTE
+
+    metadata("filesDeleted" to 42)
+}
+```
+
+**Полные события** (со всеми полями):
+- Действия пользователей
+- Изменения данных
+- События аудита безопасности
+- Все события, требующие детального анализа
+
+Используйте **фабричные методы** для создания стандартных полных событий.
+
+### 2. Формат action
 
 Используйте формат `domain.entity.verb`:
 - `sales.order.created`
 - `iam.user.role_changed`
 - `billing.invoice.updated`
 
-### 2. Логирование изменений
+### 3. Логирование изменений
 
 Для создания используйте `oldValue: null`:
 ```kotlin
@@ -441,7 +537,7 @@ change {
 }
 ```
 
-### 3. Dot-notation для вложенных полей
+### 4. Dot-notation для вложенных полей
 
 ```kotlin
 change {
@@ -451,7 +547,7 @@ change {
 }
 ```
 
-### 4. correlationId для цепочек событий
+### 5. correlationId для цепочек событий
 
 Используйте один `correlationId` для всех событий в рамках одной бизнес-операции:
 ```kotlin
@@ -470,7 +566,7 @@ auditEvent {
 }
 ```
 
-### 5. Теги для классификации
+### 6. Теги для классификации
 
 ```kotlin
 tags(
