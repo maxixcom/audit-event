@@ -10,7 +10,7 @@ import kotlin.test.assertTrue
 
 class AuditEventSerializerTest {
 
-    private val serializer = AuditEventSerializer()
+    private val serializer = AuditEventSerializerJson()
 
     @Test
     fun `should serialize and deserialize audit event`() {

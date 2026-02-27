@@ -4,14 +4,14 @@ import io.github.maxixcom.audit.event.builder.*
 import io.github.maxixcom.audit.event.dsl.auditEvent
 import io.github.maxixcom.audit.event.factory.AuditEventFactory
 import io.github.maxixcom.audit.event.model.*
-import io.github.maxixcom.audit.event.serialization.AuditEventSerializer
+import io.github.maxixcom.audit.event.serialization.AuditEventSerializerJson
 
 /**
  * Примеры использования библиотеки User Log
  */
 object UsageExamples {
 
-    private val serializer = AuditEventSerializer()
+    private val serializer = AuditEventSerializerJson()
 
     /**
      * Пример 1: Использование Kotlin DSL

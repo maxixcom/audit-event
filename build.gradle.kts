@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "io.github.maxixcom.audit"
-version = "0.0.3"
+version = "0.0.4"
 description = "Audit event logging library"
 
 java {

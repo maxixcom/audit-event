@@ -439,8 +439,10 @@ val event = auditEvent {
 
 ```kotlin
 import io.github.maxixcom.audit.event.serialization.AuditEventSerializer
+import io.github.maxixcom.audit.event.serialization.AuditEventSerializerJson
 
-val serializer = AuditEventSerializer()
+// Jackson-реализация (JSON)
+val serializer: AuditEventSerializer = AuditEventSerializerJson()
 
 // В JSON строку
 val json = serializer.serialize(event)
@@ -584,7 +586,7 @@ tags(
 import org.apache.kafka.clients.producer.KafkaProducer
 import org.apache.kafka.clients.producer.ProducerRecord
 
-val serializer = AuditEventSerializer()
+val serializer = AuditEventSerializerJson()
 
 val event = auditEvent { /* ... */ }
 
@@ -615,7 +617,7 @@ kafkaProducer.send(record)
 
 ```kotlin
 dependencies {
-    implementation("io.github.maxixcom.audit:audit-event:0.0.3")
+    implementation("io.github.maxixcom.audit:audit-event:0.0.4")
 }
 ```
 
@@ -623,7 +625,7 @@ dependencies {
 
 ```groovy
 dependencies {
-    implementation 'io.github.maxixcom.audit:audit-event:0.0.3'
+    implementation 'io.github.maxixcom.audit:audit-event:0.0.4'
 }
 ```
 
@@ -633,7 +635,7 @@ dependencies {
 <dependency>
     <groupId>io.github.maxixcom.audit</groupId>
     <artifactId>audit-event</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.4</version>
 </dependency>
 ```
 
