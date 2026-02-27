@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "io.github.maxixcom.audit"
-version = "0.0.5"
+version = "0.0.6"
 description = "Audit event logging library"
 
 java {
@@ -88,6 +88,14 @@ publishing {
 }
 
 jreleaser {
+	// Настройка GitHub Release
+	release {
+		github {
+			branch.set("master")
+			overwrite.set(true)
+		}
+	}
+
 	// Подпись артефактов
 	signing {
 		active.set(org.jreleaser.model.Active.ALWAYS)
