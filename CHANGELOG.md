@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.8] - 2026-03-16
+
+### Added
+- Добавлено опциональное поле `groupId` в модель `Actor` для идентификации группы актора
+- Поддержка `groupId` в Kotlin DSL, Builder API и фабричных методах
+
 ## [0.0.7] - 2026-02-27
 
 ### Added
@@ -67,6 +73,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial project setup
 - Basic event model structure
 
+[0.0.8]: https://github.com/maxixcom/audit-event/compare/v0.0.7...v0.0.8
 [0.0.7]: https://github.com/maxixcom/audit-event/compare/v0.0.6...v0.0.7
 [0.0.6]: https://github.com/maxixcom/audit-event/compare/v0.0.5...v0.0.6
 [0.0.5]: https://github.com/maxixcom/audit-event/compare/v0.0.4...v0.0.5
