@@ -7,6 +7,7 @@
   "actor": {
     "actorType": "USER",
     "userId": "user-42",
+    "groupId": "group-10",
     "sessionId": "sess-xyz",
     "roles": [
       "manager",

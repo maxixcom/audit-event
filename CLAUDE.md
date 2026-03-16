@@ -41,8 +41,9 @@ The codebase follows a layered structure:
 - `AuditEvent` - The main event container with eventId, timestamp, actor, resource, changes, outcome
   - Required fields: `eventId`, `version`, `timestamp`, `source`
   - Optional fields: `actor`, `action`, `category`, `resource`, `correlationId`, `outcome`
+- `Actor` fields: `actorType`, `userId`, `groupId`, `sessionId`, `roles`, `ipAddress`, `userAgent`, `onBehalfOf`, `attributes`
   - Collections default to empty: `changes`, `metadata`, `tags`
-- `Actor` - Who performed the action (user, system, scheduler, service account)
+- `Actor` - Who performed the action (user, system, scheduler, service account). Includes optional `groupId` for group membership
 - `Resource` - What was affected (supports parent hierarchy for nested resources)
 - `Change` - Field-level changes with old/new values
 - Enums: `ActorType`, `ActionCategory` for standardized values

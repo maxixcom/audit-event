@@ -295,6 +295,7 @@ val logoutEvent = AuditEventFactory.createLogoutEvent(
 val actor = Actor(
     actorType = ActorType.USER,
     userId = "user-123",
+    groupId = "group-10",
     sessionId = "sess-xyz",
     roles = listOf("manager")
 )
