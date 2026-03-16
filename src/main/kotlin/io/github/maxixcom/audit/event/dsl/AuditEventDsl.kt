@@ -130,6 +130,7 @@ class AuditEventBuilder {
 class ActorBuilder {
     var actorType: ActorType = ActorType.USER
     var userId: String? = null
+    var groupId: String? = null
     var sessionId: String? = null
     var roles: List<String> = emptyList()
     var ipAddress: String? = null
@@ -153,6 +154,7 @@ class ActorBuilder {
         return Actor(
             actorType = actorType,
             userId = userId,
+            groupId = groupId,
             sessionId = sessionId,
             roles = roles,
             ipAddress = ipAddress,

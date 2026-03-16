@@ -35,6 +35,7 @@
   "actor": {
     "actorType": "USER",
     "userId": "u-42",
+    "groupId": "group-10",
     "sessionId": "sess-xyz",
     "roles": ["manager"],
     "ipAddress": "192.168.1.10",
@@ -617,7 +618,7 @@ kafkaProducer.send(record)
 
 ```kotlin
 dependencies {
-    implementation("io.github.maxixcom.audit:audit-event:0.0.7")
+    implementation("io.github.maxixcom.audit:audit-event:0.0.8")
 }
 ```
 
@@ -625,7 +626,7 @@ dependencies {
 
 ```groovy
 dependencies {
-    implementation 'io.github.maxixcom.audit:audit-event:0.0.7'
+    implementation 'io.github.maxixcom.audit:audit-event:0.0.8'
 }
 ```
 
@@ -635,7 +636,7 @@ dependencies {
 <dependency>
     <groupId>io.github.maxixcom.audit</groupId>
     <artifactId>audit-event</artifactId>
-    <version>0.0.7</version>
+    <version>0.0.8</version>
 </dependency>
 ```
 

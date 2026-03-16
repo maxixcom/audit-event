@@ -138,6 +138,7 @@ class AuditEventBuilder private constructor() {
  */
 class ActorBuilder private constructor(private val actorType: ActorType) {
     private var userId: String? = null
+    private var groupId: String? = null
     private var sessionId: String? = null
     private val roles = mutableListOf<String>()
     private var ipAddress: String? = null
@@ -147,6 +148,10 @@ class ActorBuilder private constructor(private val actorType: ActorType) {
 
     fun userId(userId: String): ActorBuilder = apply {
         this.userId = userId
+    }
+
+    fun groupId(groupId: String): ActorBuilder = apply {
+        this.groupId = groupId
     }
 
     fun sessionId(sessionId: String): ActorBuilder = apply {
@@ -185,6 +190,7 @@ class ActorBuilder private constructor(private val actorType: ActorType) {
         return Actor(
             actorType = actorType,
             userId = userId,
+            groupId = groupId,
             sessionId = sessionId,
             roles = roles.toList(),
             ipAddress = ipAddress,

@@ -13,6 +13,9 @@ data class Actor(
     /** ID пользователя (может быть null для системных действий) */
     val userId: String? = null,
 
+    /** ID группы актора */
+    val groupId: String? = null,
+
     /** ID сессии */
     val sessionId: String? = null,
 

@@ -97,6 +97,7 @@ object AuditEventFactory {
         this.actor {
             actorType = actor.actorType
             userId = actor.userId
+            groupId = actor.groupId
             sessionId = actor.sessionId
             roles = actor.roles
             ipAddress = actor.ipAddress
@@ -138,6 +139,7 @@ object AuditEventFactory {
         this.actor {
             actorType = actor.actorType
             userId = actor.userId
+            groupId = actor.groupId
             sessionId = actor.sessionId
             roles = actor.roles
             ipAddress = actor.ipAddress
@@ -180,6 +182,7 @@ object AuditEventFactory {
         this.actor {
             actorType = actor.actorType
             userId = actor.userId
+            groupId = actor.groupId
             sessionId = actor.sessionId
             roles = actor.roles
             ipAddress = actor.ipAddress
@@ -221,6 +224,7 @@ object AuditEventFactory {
         this.actor {
             actorType = actor.actorType
             userId = actor.userId
+            groupId = actor.groupId
             sessionId = actor.sessionId
             roles = actor.roles
             ipAddress = actor.ipAddress
@@ -255,6 +259,7 @@ object AuditEventFactory {
         this.actor {
             actorType = actor.actorType
             userId = actor.userId
+            groupId = actor.groupId
             sessionId = actor.sessionId
             roles = actor.roles
             ipAddress = actor.ipAddress
@@ -293,6 +298,7 @@ object AuditEventFactory {
         this.actor {
             actorType = actor.actorType
             userId = actor.userId
+            groupId = actor.groupId
             sessionId = actor.sessionId
             roles = actor.roles
             ipAddress = actor.ipAddress

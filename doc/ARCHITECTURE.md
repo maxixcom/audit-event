@@ -59,6 +59,7 @@ src/main/kotlin/com/boomstream/userlog/
 **Поля:**
 - `actorType`: Тип актора (USER, SYSTEM, SCHEDULER, etc.)
 - `userId`: ID пользователя/сервиса
+- `groupId`: ID группы актора
 - `sessionId`: ID сессии
 - `roles`: Роли на момент действия
 - `ipAddress`: IP адрес
